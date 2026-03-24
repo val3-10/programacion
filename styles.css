@@ -3,14 +3,14 @@
   /* ========================= */
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente principal */
-    background: #1f2937; /* Fondo claro azul-gris */
+    background: linear-gradient(135deg, #1f2937); /* Fondo degradado */
     margin: 0;
     padding: 0;
     color: rgb(0, 0, 0); /* Color de texto */
     display: flex;
     flex-direction: column;
     align-items: center; /* Centrado horizontal */
-    justify-content: flex-start; /* Alineado al inicio - header siempre visible */
+    justify-content: center; /* Centrado vertical */
     min-height: 100vh; /* Ocupa toda la altura de la pantalla */
     text-align: center;
   }
@@ -62,7 +62,7 @@
     transform: scale(1.05);
   }
   .btn-carrito {
-  position: fixed;
+  position: absolute;
   top: 290px;        
   right: 20px;      
   display: inline-block;
@@ -90,7 +90,6 @@
     width: 90%; 
     margin: 0 auto;
     padding: 20px;
-    background: transparent; /* Fondo transparente para ver el body */
   }
  
   /* SECCIONES */
@@ -119,48 +118,6 @@
   input, select {
     background: rgba(255,255,255,0.8);
     color: #333;
-  }
-
-  /* ========================= */
-  /* CONTENEDOR DE CONTRASEÑA CON OJITO */
-  /* ========================= */
-  .password-container {
-    position: relative;
-    width: 100%;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-  }
-
-  .password-container input {
-    width: 100%;
-    padding-right: 45px; /* Espacio para el ícono */
-    margin-bottom: 0; /* Evitar doble margen */
-    box-sizing: border-box; /* ✅ Incluir padding dentro del ancho */
-  }
-
-  .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 1.2rem;
-    user-select: none;
-    transition: transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-  }
-
-  .toggle-password:hover {
-    transform: translateY(-50%) scale(1.2);
-  }
-
-  .toggle-password:active {
-    transform: translateY(-50%) scale(0.95);
   }
 
   /* ========================= */
@@ -627,290 +584,3 @@
   margin: 0;
   padding-top: 200px;
 }
-/* === animaciones de los botones  === */
-button {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
-  transform: skewX(-25deg);
-  transition: left 0.6s ease;
-}
-
-button:hover::before {
-  left: 125%;
-}
-
-/* === RESPLANDOR SUAVE AL PASAR EL MOUSE === */
-button:hover {
-  text-shadow: 0 0 6px rgba(255, 223, 100, 0.8);
-  filter: brightness(1.05);
-  transform: translateY(-2px);
-}
-
-/* === PEQUEÑA ANIMACIÓN AL CLIC === */
-button:active {
-  transform: scale(0.96);
-  transition: transform 0.1s;
-}
-
-/* === APARICIÓN SUAVE AL CARGAR === */
-@keyframes fadeInButtons {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-button {
-  animation: fadeInButtons 0.6s ease;
-}
-/* === BOTÓN "VER PERFIL" === */
-.btn-perfil {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    display: inline-block;
-    width: auto;
-    background-color: #000000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-cerrar:hover {
-    background-color: #2e2e2e;
-    transform: scale(1.05);
-  }
-  /* === SECCIÓN DE HISTORIAL === */
-.historial {
-  background-color: #f5f5f5;
-  border-radius: 12px;
-  padding: 15px;
-  margin-top: 20px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-}
-
-/* === BOTONES (volver / cerrar sesión) === */
-
-/* === BOTÓN VOLVER AL CATÁLOGO === */
-.catalogo-btn {
-  position: absolute;
-  top: 280px;     
-  right: 20px;    
-  display: inline-block;
-  width: auto;
-  background-color: #000000;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.btn-volver:hover {
-  background-color: #2e2e2e;
-  transform: translateY(-2px);
-}
-
-/* === BOTÓN CERRAR SESIÓN === */
-.cerrar-sesion-btn {
-  position: absolute;
-  top: 70px;      
-  right: 20px;    
-  display: inline-block;
-  width: auto;
-  background-color: #000000;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-cerrar-sesion:hover {
-  background-color: #2e2e2e;
-  transform: translateY(-2px);
-}
-
-/* === BOTÓN ELIMINAR CUENTA === */
-.btn-eliminar {
-  position: absolute;
-  top: 120px;      
-  right: 20px;    
-  display: inline-block;
-  width: auto;
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-eliminar:hover {
-  background-color: #922b21;
-  transform: scale(1.03);
-}
-
-.password-field input {
-  width: 350px; /* 🔹 más corto, igual estilo */
-  padding: 12px 40px 12px 100px; /* espacio para el ojito */
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-sizing: border-box;
-}
-
-
-
-/* 🔹 Botón del ojito */
-.password-field button {
-  position: absolute;
-  right: 15px;           /* ligeramente más separado del borde */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🔹 Icono SVG */
-.password-field button svg {
-  width: 16px;
-  height: 16px;
-  fill: #555;
-}
-
-/* 🔹 Hover */
-.password-field button:hover svg {
-  fill: #000;
-}
-
-/* ====== MENÚ FLOTANTE DE TRES PUNTOS ====== */
-.menu-flotante {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  background-color: #1f2937;
-  color: white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: background-color 0.3s, transform 0.2s;
-  z-index: 1000;
-}
-
-.menu-flotante:hover {
-  background-color: #374151;
-  transform: scale(1.08);
-}
-
-/* ====== MENÚ DESPLEGABLE DEL FLOTANTE ====== */
-.menu-flotante-opciones2 {
-  position: absolute;
-  top: 48px;
-  right: 0;
-  background: none;
-  border-radius: 0;
-  display: none;
-  flex-direction: column;
-  box-shadow: none;
-  overflow: visible;
-  animation: fadeIn 0.3s ease;
-  min-width: 180px;
-  padding: 0;
-}
-
-/* Botones del menú flotante */
-.menu-flotante-opciones2 .btn-menu {
-  background-color: #1f2937;
-  color: #ffffff;
-  border: none;
-  padding: 10px 30px;
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.menu-flotante-opciones2 .btn-menu:hover {
-  background-color: #374151 !important;
-  transform: scale(1.03);
-}
-
-/* Animación del menú */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-  /* Botón para cerrar sesión */
-  .btn-cerrar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: inline-block;
-    width: auto;
-    background-color: #000000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-cerrar:hover {
-    background-color: #2e2e2e;
-    transform: scale(1.05);}
-    .crear-andminbtn{
-     position: absolute;
-    top: 70px;
-    right: 20px;
-    display: inline-block;
-    width: auto;
-    background-color: #000000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn-cerrar:hover {
-    background-color: #2e2e2e;
-    transform: scale(1.05);}
