@@ -1,4 +1,4 @@
-  /* ========================= */
+ /* ========================= */
   /* ESTILOS GENERALES / ADMIN */
   /* ========================= */
   body {
@@ -504,3 +504,233 @@
   margin: 0;
   padding-top: 200px;
 }
+
+  /* ========================= */
+  /* ESTILOS SECCIÓN SOBRE NOSOTROS */
+  /* ========================= */
+  
+  /* Sección Sobre Nosotros */
+  .seccion-nosotros {
+    background: #e6ebf1;
+    backdrop-filter: blur(6px);
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgb(0, 0, 0);
+    text-align: left;
+  }
+
+  .seccion-nosotros h2 {
+    color: #1f2937;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .seccion-nosotros h3 {
+    color: #1f2937;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #d4a017;
+    padding-bottom: 8px;
+  }
+
+  .seccion-nosotros h4 {
+    color: #1f2937;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* Caja de introducción */
+  .intro-box {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 18px;
+    border-left: 4px solid #d4a017;
+    border-radius: 8px;
+    margin-bottom: 25px;
+  }
+
+  .intro-box p {
+    margin: 0;
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .intro-box strong {
+    color: #1f2937;
+  }
+
+  /* Grid de características */
+  .caracteristicas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+  }
+
+  .caract-box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .caract-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    border-color: #d4a017;
+  }
+
+  .caract-box h4 {
+    color: #1f2937;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #d4a017;
+    padding-bottom: 6px;
+  }
+
+  .caract-box p {
+    color: #555;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Caja de misión */
+  .mision-box {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 18px;
+    border-left: 4px solid #d4a017;
+    border-radius: 8px;
+    margin-top: 25px;
+  }
+
+  .mision-box p {
+    color: #333;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+
+  /* Navegación interna - ARRIBA - separador sin barras */
+  .navegacion-interna {
+    background: #e6ebf1;
+    backdrop-filter: blur(6px);
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 15px 0 25px 0;
+    font-size: 0.85rem;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .navegacion-interna a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 12px;
+    transition: all 0.3s ease;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #000000;
+    display: inline-block;
+  }
+
+  .navegacion-interna a:hover {
+    background-color: #2e2e2e;
+    transform: scale(1.05);
+  }
+
+  /* Video discreto */
+  .video-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .video-fondo {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Listas contenedor */
+  .listas-contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 25px 0;
+  }
+
+  .lista-organizada, .lista-desorganizada {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+  }
+
+  .lista-organizada h4, .lista-desorganizada h4 {
+    color: #1f2937;
+    font-size: 0.95rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #d4a017;
+    padding-bottom: 6px;
+  }
+
+  .lista-organizada ol, .lista-desorganizada ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+  }
+
+  .lista-organizada li, .lista-desorganizada li {
+    color: #333;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  /* Cita de Booknest */
+  .cita-box {
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.1), rgba(212, 160, 23, 0.05));
+    padding: 20px;
+    border-left: 4px solid #d4a017;
+    border-radius: 10px;
+    margin: 25px 0;
+    text-align: center;
+  }
+
+  .cita-box p {
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 8px 0;
+  }
+
+  .cita-box p em {
+    color: #1f2937;
+    font-style: italic;
+  }
+
+  .cita-box p strong {
+    color: #1f2937;
+    display: block;
+    margin-top: 12px;
+  }
+
+  /* Responsive listas */
+  @media (max-width: 600px) {
+    .listas-contenedor {
+      grid-template-columns: 1fr;
+    }
+  }

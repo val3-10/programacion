@@ -16,16 +16,69 @@
 
   <div class="container">
 
+    <!-- NAVEGACIÓN INTERNA -->
+    <div class="navegacion-interna">
+      <a href="#catalogo"><strong>Catálogo</strong></a>
+      <a href="#sobre-nosotros"><strong>Sobre Nosotros</strong></a>
+    </div>
+
     <!-- CATÁLOGO -->
-    <div class="seccion">
+    <div class="seccion" id="catalogo">
       <h2>Catálogo de Libros</h2>
       <div id="catalogoLibros" class="catalogo-libros"></div>
     </div>
 
     <!--Sobre nosotros-->
-    <div class="seccion">
+    <div class="seccion-nosotros" id="sobre-nosotros">
       <h2>Sobre Nosotros</h2>
-      <p>¡Bienvenido a Booknest! Somos una tienda en línea dedicada a ofrecer los mejores libros a precios competitivos. Nuestra misión es promover la lectura y hacer que los libros sean accesibles para todos.</p>
+      
+      <div class="intro-box">
+        <p><strong>Booknest</strong> es tu plataforma ideal para gestionar, comprar y realizar préstamos de libros de forma simple e intuitiva. Creemos que cada persona merece acceso fácil a los libros que ama.</p>
+      </div>
+
+      <!-- Video discreto -->
+      <div class="video-container">
+        <video autoplay muted loop class="video-fondo">
+          <source src="img/video-libro.mp4" type="video/mp4">
+          Tu navegador no soporta videos HTML5.
+        </video>
+      </div>
+
+      <!-- Listas de características -->
+      <div class="listas-contenedor">
+        <div class="lista-organizada">
+          <h4>Cómo Funciona Booknest</h4>
+          <ol>
+            <li>Explora nuestro catálogo completo de libros</li>
+            <li>Selecciona el libro que deseas comprar o tomar en préstamo</li>
+            <li>Realiza el pago de forma segura en nuestro portal</li>
+            <li>Recibe confirmación y gestiona tu historial</li>
+            <li>Disfruta de tus libros sin preocupaciones</li>
+          </ol>
+        </div>
+
+        <div class="lista-desorganizada">
+          <h4>Lo Que Nos Hace Especiales</h4>
+          <ul>
+            <li>Inventario actualizado en tiempo real</li>
+            <li>Precios competitivos y justos</li>
+            <li>Sistema de préstamos flexible</li>
+            <li>Interfaz intuitiva y fácil de usar</li>
+            <li>Soporte dedicado al cliente</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cita de Booknest -->
+      <div class="cita-box">
+        <p><em>"En Booknest creemos que los libros abren puertas a infinitos mundos. Nuestro compromiso es hacer esa experiencia accesible, segura y placentera para todos."</em></p>
+        <p><strong>— Equipo Booknest</strong></p>
+      </div>
+
+      <div class="mision-box">
+        <h3>Nuestra Misión</h3>
+        <p>Somos un equipo comprometido con hacer la lectura más accesible, optimizando la gestión de inventarios y proporcionando la mejor experiencia a nuestros clientes, ya sean lectores individuales, librerías o bibliotecas.</p>
+      </div>
     </div>
 
     <!-- MODAL CARRITO -->
