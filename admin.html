@@ -1,8 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Metadatos: orientan al navegador, a los buscadores (SEO) y a redes sociales al compartir el enlace. -->
+
+  <!-- charset: codificación de caracteres (tildes, ñ, símbolos). -->
   <meta charset="UTF-8">
+  <!-- viewport: ancho inicial en móviles; evita que la página se vea “miniatura” sin zoom. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- title: texto de la pestaña y título principal en resultados de búsqueda. -->
   <title>Booknest - Administrador</title>
+
+  <!-- description: texto resumido que suelen mostrar Google y otros buscadores bajo el título. -->
+  <meta name="description" content="Panel de administración de Booknest: gestión de libros, usuarios e inventario.">
+  <!-- keywords: palabras clave del tema (hoy tienen poco peso en el ranking, sirven como documentación). -->
+  <meta name="keywords" content="Booknest, administración, gestión de libros, biblioteca">
+  <!-- author: indica autoría o proyecto dueño del contenido. -->
+  <meta name="author" content="Booknest">
+  <!-- robots: aquí noindex/nofollow pide no indexar el panel ni seguir enlaces (menos exposición en buscadores). -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- theme-color: color de la barra de interfaz del navegador en algunos móviles. -->
+  <meta name="theme-color" content="#1f2937">
+
+  <!-- Open Graph (og:*): título, tipo e idioma para vista previa en WhatsApp, Facebook, LinkedIn, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Booknest - Administración">
+  <meta property="og:description" content="Panel interno para administrar el catálogo y los datos de Booknest.">
+
+  <!-- Twitter Card: formato y textos al compartir en X/Twitter (summary = tarjeta compacta con texto). -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Booknest - Administración">
+  <meta name="twitter:description" content="Panel interno para administrar el catálogo y los datos de Booknest.">
+
   <link rel="stylesheet" href="styles.css">
 
   <style>
@@ -24,7 +53,7 @@
   </style>
 </head>
 
-<body>
+<body class="admin-body">
 <header>
   <div class="header-container">
     <button onclick="cerrarSesion()" class="btn-cerrar">Cerrar Sesión</button>
@@ -55,56 +84,62 @@
     <input type="file" id="caratula" accept="image/*" capture="environment">
     <img id="previewCaratula" alt="Vista previa">
     <button onclick="agregarLibro()">Agregar Libro</button>
-    <table id="tablaLibrosAdmin">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Estado</th>
-          <th>Stock</th>
-          <th>Precio</th>
-          <th>Carátula</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="tabla-responsive">
+      <table id="tablaLibrosAdmin">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Estado</th>
+            <th>Stock</th>
+            <th>Precio</th>
+            <th>Carátula</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- SECCIÓN: REGISTRO DE VENTAS -->
   <div id="ventas" class="seccion" style="display:none;">
     <h2>Registro de Ventas</h2>
-    <table id="tablaVentas">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Cliente</th>
-          <th>Libro</th>
-          <th>Cantidad</th>
-          <th>Precio Total</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="tabla-responsive">
+      <table id="tablaVentas">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Libro</th>
+            <th>Cantidad</th>
+            <th>Precio Total</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- SECCIÓN: REGISTRO DE PRÉSTAMOS -->
   <div id="prestamos" class="seccion" style="display:none;">
     <h2>Registro de Préstamos</h2>
-    <table id="tablaPrestamos">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Cliente</th>
-          <th>Libro</th>
-          <th>Cantidad</th>
-          <th>Duración</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="tabla-responsive">
+      <table id="tablaPrestamos">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Libro</th>
+            <th>Cantidad</th>
+            <th>Duración</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- NUEVA SECCIÓN: PROVEEDORES -->
@@ -113,16 +148,18 @@
     <input type="text" id="nombreProveedor" placeholder="Nombre del proveedor">
     <input type="text" id="contactoProveedor" placeholder="Contacto (correo o teléfono)">
     <button onclick="agregarProveedor()">Agregar Proveedor</button>
-    <table id="tablaProveedores">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Contacto</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="tabla-responsive">
+      <table id="tablaProveedores">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Contacto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 </div>
 

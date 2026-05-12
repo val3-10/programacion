@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Metadatos: orientan al navegador, a los buscadores (SEO) y a redes sociales al compartir el enlace. -->
+
+  <!-- charset: codificación de caracteres (tildes, ñ, símbolos). -->
   <meta charset="UTF-8">
+  <!-- viewport: ancho inicial en móviles; evita que la página se vea “miniatura” sin zoom. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- title: texto de la pestaña y título principal en resultados de búsqueda. -->
   <title>Booknest - Cliente</title>
+
+  <!-- description: texto resumido que suelen mostrar Google y otros buscadores bajo el título. -->
+  <meta name="description" content="Área de cliente de Booknest: catálogo, carrito, reservas y tu información personal.">
+  <!-- keywords: palabras clave del tema (hoy tienen poco peso en el ranking, sirven como documentación). -->
+  <meta name="keywords" content="Booknest, cliente, catálogo, reservas, biblioteca">
+  <!-- author: indica autoría o proyecto dueño del contenido. -->
+  <meta name="author" content="Booknest">
+  <!-- robots: aquí noindex/nofollow pide no indexar esta zona privada ni seguir enlaces (menos exposición en buscadores). -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- theme-color: color de la barra de interfaz del navegador en algunos móviles. -->
+  <meta name="theme-color" content="#1f2937">
+
+  <!-- Open Graph (og:*): título, tipo e idioma para vista previa en WhatsApp, Facebook, LinkedIn, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Booknest - Área de cliente">
+  <meta property="og:description" content="Consulta el catálogo, gestiona reservas y tu perfil en Booknest.">
+
+  <!-- Twitter Card: formato y textos al compartir en X/Twitter (summary = tarjeta compacta con texto). -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Booknest - Área de cliente">
+  <meta name="twitter:description" content="Consulta el catálogo, gestiona reservas y tu perfil en Booknest.">
+
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -12,6 +40,7 @@
       width: 100%;
       background: #1f2937;
       display: flex;
+      flex-wrap: wrap;
       justify-content: flex-end;
       align-items: center;
       gap: 12px;
@@ -188,7 +217,7 @@
     }
   </style>
 </head>
-<body>
+<body class="cliente-body">
 
 <!-- GUARD: bloquear acceso sin sesión de cliente -->
 <script>

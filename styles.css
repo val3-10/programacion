@@ -1,3 +1,25 @@
+/* ============================================================
+   RESPONSIVE — BASE GLOBAL
+   Más abajo: móvil ≤600px, tablet 601px–900px, escritorio >900px.
+   box-sizing: padding y borde cuentan dentro del ancho (menos desbordes).
+   text-size-adjust: evita zoom automático raro de fuentes en iOS.
+   img max-width: imágenes no desbordan el viewport salvo reglas más específicas.
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
 /* ========================= */
 /* ESTILOS GENERALES / ADMIN */
 /* ========================= */
@@ -15,9 +37,30 @@ body {
   text-align: center;
 }
 
-/* Título principal del header */
+/* Admin y cliente: contenido en columna desde arriba (scroll natural en móvil y escritorio). */
+body.admin-body,
+body.cliente-body {
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* Panel admin: texto alineado a la izquierda; espacio superior para el botón fijo “Cerrar sesión”. */
+body.admin-body {
+  text-align: left;
+  padding-top: 52px;
+}
+
+body.admin-body .header-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Título principal del header — tamaño fluido entre móvil y escritorio */
 header h1 {
-  font-size: 3rem;
+  font-size: clamp(1.35rem, 4vw + 0.5rem, 3rem);
   font-weight: bold;
   font-style: italic;
   color: #d4a017;
@@ -177,8 +220,10 @@ button:hover {
 /* ========================= */
 .tabla-responsive {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  margin-top: 12px;
 }
 
 table {
@@ -655,6 +700,10 @@ tr:nth-child(even) {
     padding: 28px 20px;
   }
 
+  .login-box h2 {
+    font-size: clamp(1.2rem, 5vw, 1.65rem);
+  }
+
   .registro-box {
     width: 100%;
     max-width: 100%;
@@ -683,10 +732,22 @@ tr:nth-child(even) {
     right: 10px;
   }
 
-  /* Container sin padding excesivo */
+  body.admin-body {
+    padding-top: 46px;
+  }
+
+  .seccion h2 {
+    font-size: 1.15rem;
+    line-height: 1.25;
+    word-wrap: break-word;
+  }
+
+  /* Container sin padding excesivo; min-width 0 evita desborde horizontal en flex/grid hijos */
   .container {
     width: 100% !important;
+    max-width: 100%;
     padding: 10px !important;
+    min-width: 0;
   }
 
   /* Secciones */
@@ -781,5 +842,15 @@ tr:nth-child(even) {
 
   .registro-box {
     max-width: 440px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — ESCRITORIO (≥ 901px)
+   Tarjetas del catálogo: columnas un poco más anchas en pantallas grandes.
+   ============================================================ */
+@media (min-width: 901px) {
+  .catalogo-libros {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
 }
