@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Booknest</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,19 +20,29 @@
       <button type="submit">Entrar</button>
     </form>
 
-    
     <p>¿No tienes cuenta? <a href="register.html">Crear cuenta</a></p>
   </div>
 
   <script>
+    // Si ya hay sesión activa, redirigir directamente
+    (function() {
+      const rol = localStorage.getItem("rol");
+      if (rol === "admin") { window.location.href = "admin.html"; return; }
+      if (rol === "cliente") { window.location.href = "cliente.html"; return; }
+    })();
+
     const adminUser = { email: "admin@booknest.com", password: "1234" };
 
     function login() {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
-      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      if (!email || !password) {
+        alert("Por favor completa todos los campos.");
+        return false;
+      }
 
+      // Verificar administrador
       if (email === adminUser.email && password === adminUser.password) {
         localStorage.setItem("rol", "admin");
         alert("Bienvenido, administrador.");
@@ -39,16 +50,16 @@
         return false;
       }
 
+      // Buscar usuario registrado
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
       const usuario = usuarios.find(u => u.correo === email && u.password === password);
 
       if (usuario) {
-        // --- CAMBIO: Guardar el historial y carrito individuales ---
+        // Guardar sesión del usuario activo
         localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
-        localStorage.setItem("historialCliente", JSON.stringify(usuario.historial || []));
-        localStorage.setItem("carrito", JSON.stringify(usuario.carrito || []));
+        // Carrito e historial con clave única por usuario (evita mezclar entre cuentas)
         localStorage.setItem("rol", "cliente");
-
-        alert(`Bienvenido ${usuario.nombre}`);
+        alert(`Bienvenido, ${usuario.nombre}`);
         window.location.href = "cliente.html";
       } else {
         alert("Correo o contraseña incorrectos. Verifica tus datos.");
