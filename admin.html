@@ -34,26 +34,32 @@
 
   <link rel="stylesheet" href="styles.css">
 
-  <style>
-    /* Imagen de vista previa de la carátula. Se oculta inicialmente */
+   <style>
     #previewCaratula {
       max-width: 100px;
       margin-top: 10px;
       display: none;
     }
-
-    table img {
-      width: 50px;
-      height: auto;
-    }
-
-    .toast-success { background: #4caf50; color: #fff; padding: 10px; position: fixed; top: 10px; right: 10px; border-radius: 5px;}
-    .toast-error { background: #f44336; color: #fff; padding: 10px; position: fixed; top: 10px; right: 10px; border-radius: 5px;}
-    .toast-info { background: #2196f3; color: #fff; padding: 10px; position: fixed; top: 10px; right: 10px; border-radius: 5px;}
+    table img { width: 50px; height: auto; }
+    .toast-success { background: #4caf50; color: #fff; padding: 10px; position: fixed; top: 10px; right: 10px; border-radius: 5px; z-index: 9999;}
+    .toast-error   { background: #f44336; color: #fff; padding: 10px; position: fixed; top: 10px; right: 10px; border-radius: 5px; z-index: 9999;}
+    .toast-info    { background: #2196f3; color: #fff; padding: 10px; position: fixed; top: 10px; right: 10px; border-radius: 5px; z-index: 9999;}
   </style>
 </head>
 
-<body class="admin-body">
+<body>
+
+<!-- GUARD: bloquear acceso sin rol admin -->
+<script>
+  (function() {
+    const rol = localStorage.getItem("rol");
+    if (rol !== "admin") {
+      alert("Acceso restringido. Debes iniciar sesión como administrador.");
+      window.location.href = "login.html";
+    }
+  })();
+</script>
+
 <header>
   <div class="header-container">
     <button onclick="cerrarSesion()" class="btn-cerrar">Cerrar Sesión</button>
@@ -86,20 +92,15 @@
     <button onclick="agregarLibro()">Agregar Libro</button>
     <div class="tabla-responsive">
       <table id="tablaLibrosAdmin">
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Estado</th>
-            <th>Stock</th>
-            <th>Precio</th>
-            <th>Carátula</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+      <thead>
+        <tr>
+          <th>Título</th><th>Autor</th><th>Estado</th>
+          <th>Stock</th><th>Precio</th><th>Carátula</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+      </div>
   </div>
 
   <!-- SECCIÓN: REGISTRO DE VENTAS -->
@@ -107,19 +108,15 @@
     <h2>Registro de Ventas</h2>
     <div class="tabla-responsive">
       <table id="tablaVentas">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Libro</th>
-            <th>Cantidad</th>
-            <th>Precio Total</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+      <thead>
+        <tr>
+          <th>Fecha</th><th>Cliente</th><th>Libro</th>
+          <th>Cantidad</th><th>Precio Total</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+      </div>
   </div>
 
   <!-- SECCIÓN: REGISTRO DE PRÉSTAMOS -->
@@ -127,22 +124,18 @@
     <h2>Registro de Préstamos</h2>
     <div class="tabla-responsive">
       <table id="tablaPrestamos">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Libro</th>
-            <th>Cantidad</th>
-            <th>Duración</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+      <thead>
+        <tr>
+          <th>Fecha</th><th>Cliente</th><th>Libro</th>
+          <th>Cantidad</th><th>Duración</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+      </div>
   </div>
 
-  <!-- NUEVA SECCIÓN: PROVEEDORES -->
+  <!-- SECCIÓN: PROVEEDORES -->
   <div id="proveedores" class="seccion" style="display:none;">
     <h2>Proveedores</h2>
     <input type="text" id="nombreProveedor" placeholder="Nombre del proveedor">
@@ -150,23 +143,19 @@
     <button onclick="agregarProveedor()">Agregar Proveedor</button>
     <div class="tabla-responsive">
       <table id="tablaProveedores">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Contacto</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+      <thead>
+        <tr><th>Nombre</th><th>Contacto</th><th>Acciones</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+      </div>
   </div>
 </div>
 
 <script>
-  let libros = JSON.parse(localStorage.getItem("libros")) || [];
+  let libros        = JSON.parse(localStorage.getItem("libros"))        || [];
   let transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
-  let proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
+  let proveedores   = JSON.parse(localStorage.getItem("proveedores"))   || [];
 
   document.addEventListener("DOMContentLoaded", () => {
     mostrarLibrosAdmin();
@@ -186,28 +175,26 @@
   }
 
   /* === LIBROS === */
-  document.getElementById("caratula").addEventListener("change", function(e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        const preview = document.getElementById("previewCaratula");
-        preview.src = ev.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    }
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("caratula").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const preview = document.getElementById("previewCaratula");
+          preview.src = ev.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
   });
 
   function agregarLibro() {
     const caratulaInput = document.getElementById("caratula");
-    let caratula = "";
     if (caratulaInput.files.length > 0) {
       const reader = new FileReader();
-      reader.onload = function(e) {
-        caratula = e.target.result;
-        guardarLibroConCaratula(caratula);
-      };
+      reader.onload = function(e) { guardarLibroConCaratula(e.target.result); };
       reader.readAsDataURL(caratulaInput.files[0]);
     } else {
       guardarLibroConCaratula("");
@@ -216,33 +203,31 @@
 
   function guardarLibroConCaratula(caratula) {
     const titulo = document.getElementById("titulo").value.trim();
-    const autor = document.getElementById("autor").value.trim();
+    const autor  = document.getElementById("autor").value.trim();
     const estado = document.getElementById("estado").value;
-    const stock = parseInt(document.getElementById("stock").value.trim());
-    const precio = parseFloat(document.getElementById("precio").value.trim());
+    const stock  = parseInt(document.getElementById("stock").value);
+    const precio = parseFloat(document.getElementById("precio").value);
 
     if (!titulo || !autor || isNaN(stock) || stock < 0 || isNaN(precio) || precio < 0) {
       mostrarMensaje('error', 'Complete todos los campos correctamente');
       return;
     }
 
-    libros.push({ titulo, autor, estado, stock, precio, caratula });
-    localStorage.setItem("libros", JSON.stringify(libros));
+    apiAddLibro(titulo, autor, estado, stock, precio, caratula);
     mostrarLibrosAdmin();
     mostrarMensaje('success', 'Libro agregado exitosamente');
 
-    document.getElementById("titulo").value = "";
-    document.getElementById("autor").value = "";
-    document.getElementById("stock").value = "";
-    document.getElementById("precio").value = "";
+    document.getElementById("titulo").value  = "";
+    document.getElementById("autor").value   = "";
+    document.getElementById("stock").value   = "";
+    document.getElementById("precio").value  = "";
     document.getElementById("caratula").value = "";
     document.getElementById("previewCaratula").style.display = "none";
   }
 
   function eliminarLibro(i) {
     if (!confirm('¿Está seguro de eliminar este libro?')) return;
-    libros.splice(i, 1);
-    localStorage.setItem("libros", JSON.stringify(libros));
+    apiDeleteLibro(i);
     mostrarLibrosAdmin();
     mostrarMensaje('info', 'Libro eliminado exitosamente');
   }
@@ -260,14 +245,13 @@
           <td>$${libro.precio.toFixed(2)}</td>
           <td>${libro.caratula ? `<img src="${libro.caratula}">` : 'Sin imagen'}</td>
           <td><button onclick="eliminarLibro(${i})">Eliminar</button></td>
-        </tr>
-      `;
+        </tr>`;
     });
   }
 
   /* === TRANSACCIONES === */
   function mostrarTransacciones() {
-    const ventasBody = document.querySelector("#tablaVentas tbody");
+    const ventasBody    = document.querySelector("#tablaVentas tbody");
     const prestamosBody = document.querySelector("#tablaPrestamos tbody");
     ventasBody.innerHTML = "";
     prestamosBody.innerHTML = "";
@@ -299,8 +283,7 @@
 
   function eliminarTransaccion(index) {
     if (!confirm("¿Deseas eliminar este registro?")) return;
-    transacciones.splice(index, 1);
-    localStorage.setItem("transacciones", JSON.stringify(transacciones));
+    apiDeleteTransaccion(index);
     mostrarTransacciones();
     mostrarMensaje("info", "Registro eliminado");
   }
@@ -316,27 +299,22 @@
 
   /* === PROVEEDORES === */
   function agregarProveedor() {
-    const nombre = document.getElementById("nombreProveedor").value.trim();
+    const nombre   = document.getElementById("nombreProveedor").value.trim();
     const contacto = document.getElementById("contactoProveedor").value.trim();
-
     if (!nombre || !contacto) {
       mostrarMensaje('error', 'Complete todos los campos de proveedor');
       return;
     }
-
-    proveedores.push({ nombre, contacto });
-    localStorage.setItem("proveedores", JSON.stringify(proveedores));
+    apiAddProveedor(nombre, contacto);
     mostrarProveedores();
     mostrarMensaje('success', 'Proveedor agregado correctamente');
-
-    document.getElementById("nombreProveedor").value = "";
+    document.getElementById("nombreProveedor").value  = "";
     document.getElementById("contactoProveedor").value = "";
   }
 
   function eliminarProveedor(i) {
     if (!confirm('¿Desea eliminar este proveedor?')) return;
-    proveedores.splice(i, 1);
-    localStorage.setItem("proveedores", JSON.stringify(proveedores));
+    apiDeleteProveedor(i);
     mostrarProveedores();
     mostrarMensaje('info', 'Proveedor eliminado');
   }
@@ -350,11 +328,60 @@
           <td>${p.nombre}</td>
           <td>${p.contacto}</td>
           <td><button onclick="eliminarProveedor(${i})">Eliminar</button></td>
-        </tr>
-      `;
+        </tr>`;
     });
   }
-
 </script>
+
+<!-- API LOCAL -->
+<script>
+  function apiGetLibros() { return libros; }
+
+  function apiAddLibro(titulo, autor, estado, stock, precio, caratula = "") {
+    if (!titulo || !autor || stock < 0 || precio < 0) throw new Error("Datos inválidos para el libro");
+    const libro = { titulo, autor, estado, stock, precio, caratula };
+    libros.push(libro);
+    localStorage.setItem("libros", JSON.stringify(libros));
+    return libro;
+  }
+
+  function apiDeleteLibro(index) {
+    if (index < 0 || index >= libros.length) throw new Error("Índice inválido");
+    libros.splice(index, 1);
+    localStorage.setItem("libros", JSON.stringify(libros));
+  }
+
+  function apiGetTransacciones() { return transacciones; }
+
+  function apiAddTransaccion(tipo, usuario, libro, cantidad = 1, precioTotal = 0, duracion = null) {
+    const transaccion = { tipo, fecha: new Date().toLocaleDateString(), usuario, libro, cantidad, precioTotal, duracion };
+    transacciones.push(transaccion);
+    localStorage.setItem("transacciones", JSON.stringify(transacciones));
+    return transaccion;
+  }
+
+  function apiDeleteTransaccion(index) {
+    if (index < 0 || index >= transacciones.length) throw new Error("Índice inválido");
+    transacciones.splice(index, 1);
+    localStorage.setItem("transacciones", JSON.stringify(transacciones));
+  }
+
+  function apiGetProveedores() { return proveedores; }
+
+  function apiAddProveedor(nombre, contacto) {
+    if (!nombre || !contacto) throw new Error("Datos inválidos para el proveedor");
+    const proveedor = { nombre, contacto };
+    proveedores.push(proveedor);
+    localStorage.setItem("proveedores", JSON.stringify(proveedores));
+    return proveedor;
+  }
+
+  function apiDeleteProveedor(index) {
+    if (index < 0 || index >= proveedores.length) throw new Error("Índice inválido");
+    proveedores.splice(index, 1);
+    localStorage.setItem("proveedores", JSON.stringify(proveedores));
+  }
+</script>
+
 </body>
 </html>
